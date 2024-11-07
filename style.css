@@ -1,0 +1,105 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+#map {
+  height: 80vh; /* 设置地图高度 */
+  width: 100%; /* 设置地图宽度 */
+  position: relative;
+  z-index: 1;
+}
+
+.modal {
+  display: none; /* 默认隐藏模态窗口 */
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 90%; /* 仍然使用90%的宽度 */
+  max-width: 700px; /* 增加最大宽度，设置为700px */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px; /* 模态窗口内边距 */
+  width: 100%;
+  max-width: 700px; /* 同样增加内容的最大宽度 */
+  border-radius: 8px;
+  text-align: left;
+  max-height: 70vh;
+  overflow-y: auto; /* 当内容溢出时显示滚动条 */
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #333;
+  z-index: 1001;
+}
+
+.close:hover {
+  background-color: #ddd; /* 悬停效果 */
+}
+
+/* 天气标签放置在模态窗口右上角 */
+.weather-info-box {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  opacity: 0; /* 初始透明度为0 */
+  transform: translateY(-10px); /* 初始位置上移10像素 */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* 添加过渡效果 */
+  z-index: 1001;
+  max-width: 150px; /* 限制天气信息框的最大宽度 */
+}
+
+.weather-info-box.show {
+  opacity: 1; /* 显示时透明度为1 */
+  transform: translateY(0); /* 还原位置 */
+}
+
+.weather-info-box img {
+  width: 40px; /* 天气图标的宽度 */
+  height: 40px; /* 天气图标的高度 */
+  margin-right: 8px; /* 图标与文本之间的间距 */
+}
+
+.chart-container {
+  margin-top: 20px; /* 图表上方的间距 */
+}
+
+/* 为模态窗口的内容增加顶部间距 */
+.modal-content > * {
+  margin-top: 10px; /* 在内容之间增加间距 */
+}
+
+/* 给天气信息框的顶部增加空间 */
+.weather-info-box {
+  margin-top: 50px; /* 在天气框上方留出空间 */
+}

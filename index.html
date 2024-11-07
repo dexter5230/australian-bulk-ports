@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>澳大利亚散货港口概览</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>澳大利亚散货港口概览</h1>
+  </header>
+
+  <main>
+    <div id="map"></div>
+  </main>
+
+  <!-- 模态窗口 -->
+  <div id="portModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">×</span>
+      <h2 id="modalTitle">港口名称</h2>
+      <div id="modalContent">加载中...</div>
+      <div id="weatherInfo" class="weather-info-box"></div>
+      <!-- 吞吐量图表 -->
+      <div class="chart-container">
+        <canvas id="throughputChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
