@@ -1,3 +1,4 @@
+
 // 初始化地图
 var map = L.map('map', {
   center: [-25.2744, 133.7751],
@@ -12,10 +13,11 @@ var map = L.map('map', {
   keyboard: false
 });
 
-// 添加地图图层
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+// 添加高德地图图层
+L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}&lang=zh_cn&size=1&scl=2&key=0d74da2bbff35f4ac3e0477be8deeb74', {
+  subdomains: '1234', // 高德地图支持的子域名
   maxZoom: 18,
-  attribution: '© OpenStreetMap'
+  attribution: '© 高德地图'
 }).addTo(map);
 
 // API 密钥
@@ -31,9 +33,9 @@ var ports = [
     berths: "1个泊位，散货",
     fees: { Panamax: "每吨约6美元", Handy: "每吨约5美元" },
     cargo: "锰矿石",
-    throughput: "年吞吐量约500万吨",
-    draft: "10米",
-    opening: "全年开放",
+    throughput: "年吞吐量约60万吨",
+    draft: "12.5米",
+    opening: "于2024年3月关闭直至另行通知。",
     shipTypes: "适合Panamax, Handy",
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [40, 45, 50, 55, 60] }
   },
@@ -44,11 +46,11 @@ var ports = [
     berths: "1个泊位，散货",
     fees: { Panamax: "每吨约4.5美元", Handy: "每吨约3.5美元" },
     cargo: "铝土矿",
-    throughput: "年吞吐量约300万吨",
+    throughput: "年吞吐量约350万吨",
     draft: "8米",
     opening: "全年开放",
     shipTypes: "适合Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [20, 25, 30, 35, 40] }
+    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [0, 248, 400, 179, 321] }
   },
   {
     name: "Port of Weipa Lorim Point Wharf",
@@ -57,114 +59,114 @@ var ports = [
     berths: "2个泊位，散货",
     fees: { Panamax: "每吨约4美元", Handy: "每吨约3美元" },
     cargo: "铝土矿",
-    throughput: "年吞吐量约1200万吨",
-    draft: "12米",
+    throughput: "年吞吐量约1734万吨",
+    draft: "11.7米",
     opening: "全年开放",
     shipTypes: "适合Panamax, Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [800, 900, 1000, 1100, 1200] }
+    historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [2734, 1979, 1597, 1620, 1517] }
   },
   {
     name: "Port of Abbot Point",
     lat: -20.3923,
     lon: 148.0956,
-    berths: "4个泊位，散货",
+    berths: "2个泊位，散货",
     fees: { Capesize: "每吨约5.5美元", Panamax: "每吨约4.5美元" },
     cargo: "煤炭",
-    throughput: "年吞吐量约5000万吨",
-    draft: "14米",
-    opening: "全年开放",
-    shipTypes: "适合Capesize, Panamax",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [4000, 4500, 4800, 5000, 5200] }
+    throughput: "年吞吐量约3466万吨",
+    draft: "17.6米",
+    opening: "全年开放, 圣诞节期间关闭",
+    shipTypes: "适合Handymax, Panamax, Supramax, Capesize, Kamsarmax",
+    historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [2894, 3189, 2956, 2823, 3344] }
   },
   {
     name: "Port of Mackay",
     lat: -21.1415,
     lon: 149.1953,
-    berths: "2个泊位，散货",
-    fees: { Panamax: "每吨约6美元", Handy: "每吨约5美元" },
-    cargo: "煤炭",
-    throughput: "年吞吐量约700万吨",
-    draft: "10米",
+    berths: "4个泊位，散货",
+    fees: { Panamax粮食: "280,000澳元", Handysize粮食: "128,000澳元", Handymax粮食: "160,000澳元", Supramax粮食: "218,000澳元"},
+    cargo: "煤炭, 燃料, 糖, 谷物, 磁铁矿, 肥料, 废金属",
+    throughput: "年吞吐量约358万吨",
+    draft: "13.1米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [500, 600, 650, 700, 750] }
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax",
+    historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [291, 318, 318, 359, 351] }
   },
   {
     name: "Port of Hay Point",
     lat: -21.2081,
     lon: 149.2869,
-    berths: "2个泊位，散货",
-    fees: { Capesize: "每吨约5.5美元", Panamax: "每吨约4.5美元" },
+    berths: "3个泊位，散货",
+    fees: { Handysize: "129,345澳元", Panamax: "147,445澳元", Supramax: "130,870澳元", Kamsarmax: "150,500澳元" },
     cargo: "煤炭",
-    throughput: "年吞吐量约4000万吨",
-    draft: "14米",
+    throughput: "年吞吐量约9997万吨",
+    draft: "17.5米",
     opening: "全年开放",
-    shipTypes: "适合Capesize, Panamax",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [3200, 3500, 3800, 4000, 4200] }
+    shipTypes: "适合Handysize, Panamax, Supramax, Kamsarmax",
+    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [0, 11832, 11086, 9832, 9710] }
   },
   {
     name: "Dalrymple Bay Coal Terminal",
     lat: -21.1820,
     lon: 149.2280,
-    berths: "4个泊位，散货",
-    fees: { Capesize: "每吨约6美元", Panamax: "每吨约5美元" },
+    berths: "2个泊位，散货",
+    fees: { Handysize: "107,190澳元", Panamax: "127,100澳元", Supramax: "116,635澳元", Kamsarmax: "136,645澳元" },
     cargo: "煤炭",
-    throughput: "年吞吐量约8000万吨",
+    throughput: "年吞吐量约6052万吨",
     draft: "15米",
     opening: "全年开放",
-    shipTypes: "适合Capesize, Panamax",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [6500, 7000, 7200, 7800, 8000] }
+    shipTypes: "适合Handysize, Panamax, Supramax, Kamsarmax",
+    historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [6939, 6118, 5189, 5323, 5683] }
   },
   {
     name: "Port of Gladstone",
     lat: -23.8495,
     lon: 151.2634,
-    berths: "10个泊位，散货和集装箱",
-    fees: { Panamax: "每吨约5美元", Handy: "每吨约4美元" },
-    cargo: "煤炭，铝土矿",
-    throughput: "年吞吐量约1100万吨",
-    draft: "12米",
+    berths: "15个泊位，散货和集装箱",
+    fees: { Panamax粮食: "118,450澳元", Handysize粮食: "80,350澳元", Handymax粮食: "97,850澳元", Supramax粮食: "103,000澳元" },
+    cargo: "煤炭，铝土矿，谷物，水泥，铁矿，水泥熟料，废金属",
+    throughput: "年吞吐量约11121万吨",
+    draft: "18.8米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [900, 1000, 1100, 1200, 1300] }
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax",
+    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [0, 12402, 12199, 12262, 11941] }
   },
   {
     name: "Port of Brisbane",
     lat: -27.4111,
     lon: 153.1176,
-    berths: "8个泊位，散货和集装箱",
-    fees: { Panamax: "每吨约7美元", Handy: "每吨约6美元" },
-    cargo: "各种货物",
-    throughput: "年吞吐量约800万吨",
-    draft: "13米",
+    berths: "13个泊位，散货和集装箱",
+    fees: { Panamax粮食: "92,000澳元", Handysize粮食: "87,650澳元", Handymax粮食: "97,335澳元", Supramax粮食: "104,665澳元" },
+    cargo: "熟料，石膏，谷物，肥料，糖，矿砂，废钢，沥青",
+    throughput: "年吞吐量约3415万吨",
+    draft: "14.2米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [600, 700, 800, 900, 1000] }
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax",
+    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [0, 3404, 3140, 2930, 3210] }
   },
   {
     name: "Port of Newcastle",
     lat: -32.9173,
     lon: 151.7740,
-    berths: "8个泊位，散货",
-    fees: { Capesize: "每吨约6美元", Panamax: "每吨约5美元" },
-    cargo: "煤炭",
+    berths: "2个泊位，散货",
+    fees: { Panamax粮食: "97,425澳元", Handysize粮食: "61,530澳元", Handymax粮食: "71,320澳元", Supramax粮食: "75,490澳元" },
+    cargo: "煤炭，水泥，氧化铝，石油焦，磁铁矿，沙子，废料，肥料，谷物，矿石精矿",
     throughput: "年吞吐量约1500万吨",
-    draft: "13米",
+    draft: "16.2米",
     opening: "全年开放",
-    shipTypes: "适合Capesize, Panamax",
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax",
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [1200, 1300, 1400, 1500, 1600] }
   },
   {
     name: "Port of Port Kembla",
     lat: -34.4656,
     lon: 150.8955,
-    berths: "6个泊位，散货和集装箱",
-    fees: { Panamax: "每吨约5.5美元", Handy: "每吨约4.5美元" },
-    cargo: "煤炭，铁矿石",
+    berths: "4个泊位，散货",
+    fees: { Panamax粮食: "142,340澳元", Handysize粮食: "81,480澳元", Handymax粮食: "94,890澳元", Supramax粮食: "98,215澳元" },
+    cargo: "铜精矿，肥料，熟料，纸浆，锯材，钢铁",
     throughput: "年吞吐量约600万吨",
-    draft: "12米",
+    draft: "16米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax",
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [500, 550, 600, 650, 700] }
   },
   {
@@ -174,11 +176,11 @@ var ports = [
     berths: "10个泊位，散货",
     fees: { Capesize: "每吨约5美元", Panamax: "每吨约4美元" },
     cargo: "铁矿石",
-    throughput: "年吞吐量约6000万吨",
-    draft: "14米",
+    throughput: "年吞吐量约57360万吨",
+    draft: "19.2米",
     opening: "全年开放",
     shipTypes: "适合Capesize, Panamax",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [5000, 5500, 5800, 6000, 6200] }
+    historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [0, 53820, 54610, 56110, 56650] }
   },
   {
     name: "Port of Cape Preston",
@@ -210,92 +212,92 @@ var ports = [
     name: "Port of Esperance",
     lat: -33.8603,
     lon: 121.8945,
-    berths: "2个泊位，散货",
-    fees: { Panamax: "每吨约4.5美元", Handy: "每吨约3.5美元" },
-    cargo: "小麦，羊毛",
-    throughput: "年吞吐量约200万吨",
-    draft: "11米",
+    berths: "3个泊位，散货",
+    fees: { Panamax粮食: "155,000澳元", Handysize粮食: "111,000澳元", Handymax粮食: "130,000澳元", Supramax粮食: "141,000澳元", Kamsarmax粮食: "165,000澳元" },
+    cargo: "铁矿，谷物",
+    throughput: "年吞吐量约1320万吨",
+    draft: "18米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [150, 160, 170, 180, 190] }
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax, Kamsarmax",
+    historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [0, 0, 0, 0, 1360] }
   },
   {
     name: "Port of Dampier",
     lat: -20.6284,
     lon: 116.6872,
-    berths: "5个泊位，散货",
-    fees: { Capesize: "每吨约6美元", Panamax: "每吨约5美元" },
-    cargo: "铁矿石，液化天然气",
-    throughput: "年吞吐量约4000万吨",
-    draft: "14米",
-    opening: "全年开放",
-    shipTypes: "适合Capesize, Panamax",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [3000, 3500, 3800, 4000, 4200] }
+    berths: "7个泊位，散货",
+    fees: { Handysize: "90,685澳元", Panamax: "112,025澳元", Supramax: "101,050澳元", Kamsarmax: "114,760澳元" },
+    cargo: "铁矿石，盐，氨，矿物，谷物，一般散货",
+    throughput: "年吞吐量约17264万吨",
+    draft: "17.5米",
+    opening: "在热带气旋季节通常为每年11月至次年4月期间因天气预警而暂时关闭",
+    shipTypes: "适合Handysize, Panamax, Supramax, Kamsarmax",
+    historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [0, 16793, 16741, 16189, 17400] }
   },
   {
     name: "Port of Cape Cuvier",
     lat: -24.7312,
     lon: 113.4778,
     berths: "1个泊位，散货",
-    fees: { Handy: "每吨约3.5美元" },
-    cargo: "海鲜",
+    fees: { Handysize: "75,925澳元", Panamax: "121,150澳元", Supramax: "99,820澳元", Kamsarmax: "131,420澳元" },
+    cargo: "盐，石膏",
     throughput: "年吞吐量约10万吨",
-    draft: "8米",
-    opening: "全年开放",
-    shipTypes: "适合Handy",
+    draft: "16.8米",
+    opening: "通常每年有一次非固定的持续3-4周的大规模关闭",
+    shipTypes: "适合Handysize, Panamax, Supramax, Kamsarmax, Handymax, Ultramax",
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [8, 9, 10, 11, 12] }
   },
   {
     name: "Port of Geraldton",
     lat: -28.7784,
     lon: 114.6134,
-    berths: "2个泊位，散货",
-    fees: { Panamax: "每吨约5美元", Handy: "每吨约4美元" },
-    cargo: "小麦，铝土矿",
-    throughput: "年吞吐量约500万吨",
-    draft: "10米",
+    berths: "7个泊位，散货",
+    fees: { Panamax: "76,000澳元", Kamsarmax: "81,000澳元", Capesize: "93,000澳元" },
+    cargo: "谷物，矿物，铁矿，肥料，燃料",
+    throughput: "年吞吐量约1729万吨",
+    draft: "12.8米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [400, 450, 500, 550, 600] }
+    shipTypes: "适合Handysize, Panamax, Supramax, Kamsarmax, Handymax, Capesize",
+    historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [0, 1495, 1507, 1640, 1741] }
   },
   {
     name: "Port of Kwinana",
     lat: -32.1897,
     lon: 115.7610,
     berths: "3个泊位，散货",
-    fees: { Panamax: "每吨约5.5美元", Handy: "每吨约4.5美元" },
-    cargo: "煤炭，液体货物",
+    fees: { Panamax粮食: "88,000澳元", Handysize粮食: "67,000澳元", Handymax粮食: "78,000澳元", Supramax粮食: "83,000澳元", Kamsarmax粮食: "94,000澳元" },
+    cargo: "煤炭，石油，液化石油气，氧化铝，矿砂，化肥，煤炭，硫磺，铁矿",
     throughput: "年吞吐量约600万吨",
-    draft: "12米",
+    draft: "10.5米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax, Kamsarmax",
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [500, 550, 600, 650, 700] }
   },
   {
     name: "Port of Bunbury",
     lat: -33.3263,
     lon: 115.6353,
-    berths: "4个泊位，散货和集装箱",
-    fees: { Panamax: "每吨约5.5美元", Handy: "每吨约4.5美元" },
-    cargo: "小麦，木材",
-    throughput: "年吞吐量约300万吨",
-    draft: "10米",
+    berths: "5个泊位，散货",
+    fees: { Panamax粮食: "170,000澳元", Handysize粮食: "112,000澳元", Handymax粮食: "125,000澳元" },
+    cargo: "甲醇，氧化铝，木片，谷物，氢氧化钠，一般散货",
+    throughput: "年吞吐量约1700万吨",
+    draft: "11.6米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [250, 270, 290, 300, 320] }
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax",
+    historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [0, 0, 0, 0, 1810] }
   },
   {
     name: "Port of Albany",
     lat: -35.0219,
     lon: 117.8915,
     berths: "2个泊位，散货",
-    fees: { Panamax: "每吨约4.5美元", Handy: "每吨约3.5美元" },
-    cargo: "小麦",
-    throughput: "年吞吐量约200万吨",
-    draft: "9米",
+    fees: { Panamax粮食: "126,000澳元", Handysize粮食: "98,000澳元", Handymax粮食: "108,000澳元", Supramax粮食: "119,000澳元", Kamsarmax粮食: "130,000澳元" },
+    cargo: "谷物，木片",
+    throughput: "年吞吐量约520万吨",
+    draft: "11.7米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [150, 160, 170, 180, 190] }
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax, Kamsarmax",
+    historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [0, 0, 0, 0, 550] }
   },
   {
     name: "Port of Port Latta",
@@ -303,7 +305,7 @@ var ports = [
     lon: 145.3378,
     berths: "1个泊位，散货",
     fees: { Panamax: "每吨约5美元", Handy: "每吨约4美元" },
-    cargo: "铝土矿",
+    cargo: "铁矿",
     throughput: "年吞吐量约100万吨",
     draft: "8米",
     opening: "全年开放",
@@ -314,53 +316,53 @@ var ports = [
     name: "Port of Geelong",
     lat: -38.1499,
     lon: 144.3607,
-    berths: "3个泊位，散货和集装箱",
-    fees: { Panamax: "每吨约5.5美元", Handy: "每吨约4.5美元" },
-    cargo: "各种货物",
-    throughput: "年吞吐量约500万吨",
-    draft: "11米",
+    berths: "4个泊位，散货",
+    fees: { Panamax粮食: "177,500澳元", Handysize粮食: "12,500澳元", Handymax粮食: "93,500澳元", Supramax粮食: "166,000澳元" },
+    cargo: "农产品，木片，矿物，化肥，石油",
+    throughput: "年吞吐量约1367万吨",
+    draft: "11.7米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [400, 450, 500, 550, 600] }
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax",
+    historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [0, 1152, 1078, 1162, 1151] }
   },
   {
     name: "Port of Portland",
     lat: -38.3586,
     lon: 141.5930,
-    berths: "3个泊位，散货",
-    fees: { Panamax: "每吨约5美元", Handy: "每吨约4美元" },
-    cargo: "小麦",
-    throughput: "年吞吐量约200万吨",
-    draft: "10米",
+    berths: "5个泊位，散货",
+    fees: { Panamax粮食: "128,525澳元", Handysize粮食: "105,465澳元", Handymax粮食: "117,535澳元", Supramax粮食: "123,325澳元" },
+    cargo: "原木，木片，冶炼产品，化肥，谷物，矿砂",
+    throughput: "年吞吐量约610万吨",
+    draft: "12.7米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [150, 160, 170, 180, 190] }
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax",
+    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [0, 0, 0, 0, 0] }
   },
   {
     name: "Port of Melbourne",
     lat: -37.8143,
     lon: 144.9632,
-    berths: "30个泊位，散货和集装箱",
-    fees: { Panamax: "每吨约7美元", Handy: "每吨约6美元" },
-    cargo: "各种货物",
+    berths: "6个泊位，散货",
+    fees: { Panamax粮食: "138,000澳元", Handysize粮食: "115,000澳元", Handymax粮食: "123,235澳元", Supramax粮食: "149,665澳元" },
+    cargo: "钢铁，水泥，谷物，石膏，原油肥料和矿物，NEI，油菜籽，石油",
     throughput: "年吞吐量约2000万吨",
-    draft: "13米",
+    draft: "14.7米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax",
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [1500, 1600, 1700, 1800, 1900] }
   },
   {
     name: "Port of Adelaide",
     lat: -34.9285,
     lon: 138.6007,
-    berths: "8个泊位，散货和集装箱",
-    fees: { Panamax: "每吨约6美元", Handy: "每吨约5美元" },
-    cargo: "小麦，葡萄酒",
-    throughput: "年吞吐量约800万吨",
-    draft: "10米",
+    berths: "3个泊位，散货",
+    fees: { Panamax粮食: "136,335澳元", Handysize粮食: "85,250澳元", Handymax粮食: "100,250澳元", Supramax粮食: "121,000澳元", Kamsarmax粮食: "127,000澳元" },
+    cargo: "肥料，废金属，钢材，纺织品，酸，纯碱，林业，谷物，矿砂，牲畜，硫磺，废金属，水泥，熟料，石灰石，石油，散装液体，杂物，谷物",
+    throughput: "年吞吐量约0万吨",
+    draft: "13米",
     opening: "全年开放",
-    shipTypes: "适合Panamax, Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [600, 650, 700, 750, 800] }
+    shipTypes: "适合Panamax, Handysize, Handymax, Supramax, Kamsarmax",
+    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [0, 0, 0, 0, 0] }
   },
   {
     name: "Port of Whyalla",
@@ -370,7 +372,7 @@ var ports = [
     fees: { Panamax: "每吨约4.5美元", Handy: "每吨约3.5美元" },
     cargo: "矿石",
     throughput: "年吞吐量约150万吨",
-    draft: "9米",
+    draft: "12.5米",
     opening: "全年开放",
     shipTypes: "适合Panamax, Handy",
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [120, 130, 140, 150, 160] }
@@ -379,18 +381,16 @@ var ports = [
     name: "Port of Lincoln",
     lat: -34.7339,
     lon: 135.8684,
-    berths: "1个泊位，散货",
-    fees: { Panamax: "每吨约4美元", Handy: "每吨约3美元" },
-    cargo: "海鲜",
-    throughput: "年吞吐量约20万吨",
-    draft: "8米",
-    opening: "全年开放",
-    shipTypes: "适合Handy",
-    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [15, 18, 20, 22, 25] }
+    berths: "2个泊位，散货",
+    fees: { Handymax: "99,670澳元", Panamax: "127,465澳元", Supramax: "113,620澳元", Capesize: "129,770澳元" },
+    cargo: "谷物",
+    throughput: "年吞吐量约0万吨",
+    draft: "14.7米",
+    opening: "只能在白天停泊，白天或者晚上离开",
+    shipTypes: "适合Handysize, Handymax, Supramax, Panamax, Capesize, Kamsarmax",
+    historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: [0, 0, 0, 0, 0] }
   }
 ];
-
-
 
 // 为每个港口添加标记
 ports.forEach(port => {
