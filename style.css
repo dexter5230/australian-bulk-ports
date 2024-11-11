@@ -11,11 +11,56 @@ header {
   text-align: center;
 }
 
+#main {
+  display: flex;
+}
+
 #map {
-  height: 80vh; /* 设置地图高度 */
-  width: 100%; /* 设置地图宽度 */
+  height: 80vh;
+  width: 100%;
   position: relative;
   z-index: 1;
+}
+
+/* 搜索栏在地图右上角 */
+#searchContainer {
+  position: absolute;
+  top: 110px; /* 调整距离顶部的位置 */
+  right: 40px; /* 保持在地图的右侧 */
+  width: 280px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+#searchBox {
+  width: 90%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+#suggestionsList {
+  list-style: none;
+  padding: 0;
+  margin-top: 5px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+#suggestionsList li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+#suggestionsList li:hover {
+  background-color: #eee;
 }
 
 .modal {

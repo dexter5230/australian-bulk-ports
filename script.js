@@ -2,7 +2,7 @@
 // 初始化地图
 var map = L.map('map', {
   center: [-25.2744, 133.7751],
-  zoom: 4,
+  zoom: 5,
   minZoom: 4,
   maxZoom: 8,
   zoomControl: false,
@@ -513,4 +513,83 @@ function closeModal() {
 function getWindDirection(degree) {
   const directions = ["北", "东北", "东", "东南", "南", "西南", "西", "西北"];
   return directions[Math.round(degree / 45) % 8];
+}
+
+// 定义初始地图视图
+const initialView = {
+  center: [-25.2744, 133.7751],
+  zoom: 5
+};
+
+// 初始化地图
+var map = L.map('map', {
+  center: initialView.center,
+  zoom: initialView.zoom,
+  minZoom: 4,
+  maxZoom: 8,
+  zoomControl: false,
+  dragging: true,
+  scrollWheelZoom: true,
+  doubleClickZoom: false,
+  boxZoom: false,
+  keyboard: false
+});
+
+// 创建地图和标记
+var markers = {};
+ports.forEach(port => {
+  const marker = L.marker([port.lat, port.lon]).addTo(map)
+    .bindPopup(`<strong>${port.name}</strong>`)
+    .on("click", function() {
+      showModal(port);
+    });
+  markers[port.name.toLowerCase()] = marker;
+});
+
+// 处理搜索输入
+function handleSearchInput() {
+  const searchBox = document.getElementById("searchBox");
+  const query = searchBox.value.toLowerCase();
+  const suggestionsList = document.getElementById("suggestionsList");
+
+  // 清空当前建议
+  suggestionsList.innerHTML = "";
+
+  if (query) {
+    const suggestions = ports.filter(port => port.name.toLowerCase().includes(query));
+    
+    suggestions.forEach(suggestion => {
+      const listItem = document.createElement("li");
+      listItem.textContent = suggestion.name;
+      listItem.onclick = () => highlightPort(suggestion.name);
+      suggestionsList.appendChild(listItem);
+    });
+  } else {
+    // 当搜索框为空时，恢复到初始视图
+    map.setView(initialView.center, initialView.zoom);
+  }
+}
+
+// 高亮并移动到港口
+function highlightPort(portName) {
+  const port = ports.find(p => p.name === portName);
+
+  if (port) {
+    map.setView([port.lat, port.lon], 8);  // 缩放地图到港口
+    markers[port.name.toLowerCase()].openPopup();  // 打开港口标记的弹出窗口
+
+    // 清空搜索框和建议列表
+    document.getElementById("searchBox").value = "";
+    document.getElementById("suggestionsList").innerHTML = "";
+  }
+}
+
+// 修改关闭模态窗口函数
+function closeModal() {
+  document.getElementById("portModal").style.display = "none";
+  document.getElementById("weatherInfo").innerHTML = "";
+  document.getElementById("weatherInfo").classList.remove("show");
+
+  // 恢复地图到初始视图
+  map.setView(initialView.center, initialView.zoom);
 }
