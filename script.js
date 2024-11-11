@@ -2,8 +2,8 @@
 // 初始化地图
 var map = L.map('map', {
   center: [-25.2744, 133.7751],
-  zoom: 5,
-  minZoom: 4,
+  zoom: 4,
+  minZoom: 0,
   maxZoom: 8,
   zoomControl: false,
   dragging: false,
@@ -522,18 +522,9 @@ const initialView = {
 };
 
 // 初始化地图
-var map = L.map('map', {
-  center: initialView.center,
-  zoom: initialView.zoom,
-  minZoom: 4,
-  maxZoom: 8,
-  zoomControl: false,
-  dragging: true,
-  scrollWheelZoom: true,
-  doubleClickZoom: false,
-  boxZoom: false,
-  keyboard: false
-});
+  map.center = initialView.center;
+  map.zoom= initialView.zoom;
+  
 
 // 创建地图和标记
 var markers = {};
@@ -593,3 +584,39 @@ function closeModal() {
   // 恢复地图到初始视图
   map.setView(initialView.center, initialView.zoom);
 }
+
+function displayTopPorts() {
+  console.log("执行 displayTopPorts 函数，港口数据:", ports); // 确认 ports 数组内容
+
+  const topPorts = [...ports]
+    .map(port => {
+      // 解析吞吐量字符串中的数值部分
+      const throughput = parseFloat(port.throughput.replace(/[^\d.-]/g, ''));
+      console.log(`港口: ${port.name}, 吞吐量: ${throughput}`); // 确认每个港口的吞吐量
+      return { ...port, throughput: throughput || 0 };
+    })
+    .sort((a, b) => b.throughput - a.throughput)
+    .slice(0, 10);
+
+  console.log("排序后的前10港口数据:", topPorts); // 输出排序后的数据
+
+  const rankTableBody = document.getElementById("rankTable").getElementsByTagName("tbody")[0];
+  rankTableBody.innerHTML = ""; // 清空表格内容
+
+  topPorts.forEach((port, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${port.name}</td>
+      <td>${port.throughput}</td>
+    `;
+    rankTableBody.appendChild(row);
+  });
+}
+
+// 在页面加载完成后调用 displayTopPorts()
+window.addEventListener("load", function() {
+  console.log("页面加载完成，准备调用 displayTopPorts 函数");
+  displayTopPorts();
+});
+
