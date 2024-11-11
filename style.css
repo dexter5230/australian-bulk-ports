@@ -11,32 +11,51 @@ header {
   text-align: center;
 }
 
-#main {
+main {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* 地图容器 */
 #map {
+  position: relative;
   height: 80vh;
   width: 100%;
-  position: relative;
-  z-index: 1;
+  background-color: #e0e0e0; /* 地图背景色示例 */
+  overflow: hidden;
 }
 
-/* 搜索栏在地图右上角 */
-#searchContainer {
+/* 左上角的排名表 */
+#rankContainer {
   position: absolute;
-  top: 110px; /* 调整距离顶部的位置 */
-  right: 40px; /* 保持在地图的右侧 */
-  width: 280px;
+  top: 60px; /* 与标题栏有一定距离 */
+  left: 10px;
+  width: 250px;
   background-color: white;
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  overflow-y: auto;
+  max-height: 70vh;
+  z-index: 1000; /* 确保排名表在地图上方 */
+}
+
+/* 右上角的搜索栏 */
+#searchContainer {
+  position: absolute;
+  top: 60px; /* 与标题栏有一定距离 */
+  right: 10px;
+  width: 250px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* 确保搜索栏在地图上方 */
 }
 
 #searchBox {
-  width: 90%;
+  width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -63,6 +82,31 @@ header {
   background-color: #eee;
 }
 
+/* 排名表样式 */
+#rankTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#rankTable th,
+#rankTable td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#rankTable th {
+  background-color: #333;
+  color: white;
+}
+
+#rankTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#rankTable tr:hover {
+  background-color: #e6e6e6;
+}
 .modal {
   display: none; /* 默认隐藏模态窗口 */
   position: fixed;
