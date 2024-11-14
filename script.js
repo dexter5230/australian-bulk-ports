@@ -589,7 +589,11 @@ function handleSearchInput() {
     suggestions.forEach(suggestion => {
       const listItem = document.createElement("li");
       listItem.textContent = suggestion.name;
-      listItem.onclick = () => highlightPort(suggestion.name);
+      // 更新点击事件，直接调用 showModal 并传递港口数据
+      listItem.onclick = () => {
+        showModal(suggestion);  // 打开模态窗口
+        map.setView([suggestion.lat, suggestion.lon], 8);  // 缩放地图到港口位置
+      };
       suggestionsList.appendChild(listItem);
     });
   } else {
@@ -597,7 +601,6 @@ function handleSearchInput() {
     map.setView(initialView.center, initialView.zoom);
   }
 }
-
 // 高亮并移动到港口
 function highlightPort(portName) {
   const port = ports.find(p => p.name === portName);
