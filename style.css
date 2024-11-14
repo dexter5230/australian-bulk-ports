@@ -20,25 +20,62 @@ main {
 /* 地图容器 */
 #map {
   position: relative;
-  height: 80vh;
+  height: 95vh;
   width: 100%;
   background-color: #e0e0e0; /* 地图背景色示例 */
   overflow: hidden;
 }
 
-/* 左上角的排名表 */
+/* 更新排名表样式，使其更美观 */
 #rankContainer {
   position: absolute;
-  top: 60px; /* 与标题栏有一定距离 */
+  top: 60px;
   left: 10px;
-  width: 250px;
+  width: 300px; /* 调整宽度 */
   background-color: white;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
   overflow-y: auto;
   max-height: 70vh;
-  z-index: 1000; /* 确保排名表在地图上方 */
+  z-index: 1000;
+}
+
+#rankTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#rankTable th,
+#rankTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  color: #333;
+}
+
+#rankTable th {
+  background-color: #333; /* 深色背景 */
+  color: white; /* 白色文字 */
+  font-weight: bold;
+}
+
+#rankTable tr:nth-child(even) {
+  background-color: #f7f7f7; /* 增加交替行背景色 */
+}
+
+#rankTable tr:hover {
+  background-color: #e0e0e0; /* 悬停时变色 */
+}
+
+/* 表格标题样式 */
+#rankContainer h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
 }
 
 /* 右上角的搜索栏 */
@@ -55,7 +92,7 @@ main {
 }
 
 #searchBox {
-  width: 100%;
+  width: 90%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
