@@ -489,16 +489,30 @@ function fetchAirQualityData(port) {
 // 显示吞吐量图表
 function displayThroughputChart(port) {
   setTimeout(() => {
-    var ctx = document.getElementById("throughputChart");
+    const ctx = document.getElementById("throughputChart");
     if (ctx) {
+      // 提取年份和吞吐量数据
+      const years = port.historicalData.years;
+      const throughput = port.historicalData.throughput.map(value => 
+        value === "暂无" ? null : value
+      );
+
+      // 过滤掉全为空值的年份
+      const filteredData = years
+        .map((year, index) => ({ year, throughput: throughput[index] }))
+        .filter(dataPoint => dataPoint.throughput !== null);
+
+      const filteredYears = filteredData.map(data => data.year);
+      const filteredThroughput = filteredData.map(data => data.throughput);
+
       new Chart(ctx.getContext("2d"), {
         type: 'line',
         data: {
-          labels: port.historicalData.years,
+          labels: filteredYears,
           datasets: [
             {
               label: '年吞吐量（万吨）',
-              data: port.historicalData.throughput,
+              data: filteredThroughput,
               borderColor: 'rgba(75, 192, 192, 1)',
               backgroundColor: 'rgba(75, 192, 192, 0.2)',
               fill: true
@@ -515,6 +529,7 @@ function displayThroughputChart(port) {
     }
   }, 250);
 }
+
 
 // 关闭模态窗口
 function closeModal() {
@@ -664,13 +679,16 @@ function applyFilter() {
         .sort((a, b) => b.throughputValue - a.throughputValue);
       break;
     
-    case "bauxite":
-      // 筛选出装卸粮食的港口并按吞吐量排序
-      filteredPorts = ports
-        .filter(port => port.cargo.includes("铝土矿"))
-        .map(port => ({ ...port, throughputValue: parseFloat(port.throughput.replace(/[^\d.-]/g, '')) || 0 }))
-        .sort((a, b) => b.throughputValue - a.throughputValue);
-      break;
+    case "coal":
+  // 筛选出装卸煤炭的港口并按吞吐量排序
+  filteredPorts = ports
+    .filter(port => typeof port.cargo === "string" && /煤/.test(port.cargo)) // 使用正则表达式检查是否包含“煤”
+    .map(port => ({
+      ...port,
+      throughputValue: parseFloat(port.throughput.replace(/[^\d.-]/g, '')) || 0
+    }))
+    .sort((a, b) => b.throughputValue - a.throughputValue);
+  break;
     
   }
 
@@ -687,6 +705,9 @@ function updateTable(portList) {
   portList.forEach((port, index) => {
     const row = document.createElement("tr");
 
+    // 判断吞吐量是否为“暂无”或0
+    const throughputText = port.throughput.includes("暂无") ? "暂无" : `${port.throughputValue} 万吨`;
+
     // 创建港口名称单元格并添加点击事件
     const portNameCell = document.createElement("td");
     portNameCell.innerHTML = `<a href="#" style="text-decoration: none; color: inherit;">${port.name}</a>`;
@@ -698,12 +719,13 @@ function updateTable(portList) {
     row.appendChild(portNameCell);
 
     const throughputCell = document.createElement("td");
-    throughputCell.textContent = `${port.throughputValue} 万吨`;
+    throughputCell.textContent = throughputText;
     row.appendChild(throughputCell);
 
     rankTableBody.appendChild(row);
   });
 }
+
 // 页面加载时初始化筛选，显示初始的港口列表
 window.addEventListener("load", function() {
   applyFilter(); // 默认显示Top 10 吞吐量
