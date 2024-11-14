@@ -18,13 +18,19 @@
   <div id="map">
     <!-- 左上角的排名表 -->
     <div id="rankContainer">
-      <h3>吞吐量排名 (Top 10)</h3>
+      <h3>港口筛选</h3>
+      <select id="filterSelect" onchange="applyFilter()">
+        <option value="top10Throughput">Top 10 吞吐量港口</option>
+        <option value="ironOre">可以装卸铁矿石的港口</option>
+        <option value="grain">可以装卸粮食的港口</option>
+        <option value="grain">可以装卸铝土矿的港口</option>
+      </select>
       <table id="rankTable">
         <thead>
           <tr>
             <th>排名</th>
             <th>港口名称</th>
-            <th>吞吐量 (万吨)</th>
+            <th>港口总吞吐量/年 (万吨)</th>
           </tr>
         </thead>
         <tbody>
