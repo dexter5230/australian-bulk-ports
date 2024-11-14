@@ -532,13 +532,13 @@ function getWindDirection(degree) {
 // 定义初始地图视图
 const initialView = {
   center: [-25.2744, 133.7751],
-  zoom: 5
+  zoom: getInitialZoom()
 };
 
 // 初始化地图
   map.center = initialView.center;
   map.zoom= initialView.zoom;
-  
+
 
 // 创建地图和标记
 var markers = {};
