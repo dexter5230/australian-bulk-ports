@@ -1,8 +1,22 @@
 
+// 获取合适的缩放级别
+
+function getInitialZoom() {
+  const width = window.innerWidth;
+
+  if (width >= 1600) {
+    return 5; // 大屏幕，缩放较高
+  } else if (width >= 1200) {
+    return 4; // 中等屏幕
+  } else {
+    return 3; // 小屏幕
+  }
+}
+
 // 初始化地图
 var map = L.map('map', {
   center: [-25.2744, 133.7751],
-  zoom: 5,
+  zoom: getInitialZoom(),
   minZoom: 0,
   maxZoom: 8,
   zoomControl: false,
