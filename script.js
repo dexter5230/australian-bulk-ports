@@ -487,10 +487,17 @@ function fetchAirQualityData(port) {
 }
 
 // 显示吞吐量图表
+let throughputChart = null;
+
 function displayThroughputChart(port) {
   setTimeout(() => {
     const ctx = document.getElementById("throughputChart");
     if (ctx) {
+      // 如果存在旧的图表实例，则销毁
+      if (throughputChart) {
+        throughputChart.destroy();
+      }
+
       // 提取年份和吞吐量数据
       const years = port.historicalData.years;
       const throughput = port.historicalData.throughput.map(value => 
@@ -505,7 +512,8 @@ function displayThroughputChart(port) {
       const filteredYears = filteredData.map(data => data.year);
       const filteredThroughput = filteredData.map(data => data.throughput);
 
-      new Chart(ctx.getContext("2d"), {
+      // 创建新图表实例
+      throughputChart = new Chart(ctx.getContext("2d"), {
         type: 'line',
         data: {
           labels: filteredYears,
