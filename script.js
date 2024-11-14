@@ -694,3 +694,23 @@ function updateTable(portList) {
 window.addEventListener("load", function() {
   applyFilter(); // 默认显示Top 10 吞吐量
 });
+
+function toggleRankList() {
+  const rankContainer = document.getElementById("rankContainer");
+  const expandButton = document.getElementById("expandButton");
+
+  if (rankContainer.classList.contains("collapsed")) {
+    // 展开
+    rankContainer.classList.remove("collapsed");
+    expandButton.style.display = "none"; // 隐藏展开按钮
+  } else {
+    // 收起
+    rankContainer.classList.add("collapsed");
+    expandButton.style.display = "block"; // 显示展开按钮
+  }
+}
+
+// 页面加载时初始化
+window.addEventListener("load", function() {
+  document.getElementById("expandButton").style.display = "none"; // 隐藏展开按钮
+});
