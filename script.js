@@ -135,7 +135,7 @@ var ports = [
     name: "Port of Gladstone",
     lat: -23.8495,
     lon: 151.2634,
-    berths: "15个泊位，散货和集装箱",
+    berths: "15个泊位，散货",
     fees: { Handysize粮食: "80,350澳元", Handymax粮食: "97,850澳元", Supramax粮食: "103,000澳元", Panamax粮食: "118,450澳元", Handymax煤炭: "90,735澳元", Supramax煤炭: "102,880澳元", Ultramax煤炭: "108,365澳元", Panamax煤炭: "120,545澳元", Kamsarmax煤炭: "127,015澳元", PostPanamax煤炭: "141,245澳元", MiniCape煤炭: "167,760澳元", Capesize煤炭: "239,605澳元", Newcastlemax煤炭: "538,920澳元" },
     cargo: "煤炭，铝土矿，谷物，水泥，铁矿，水泥熟料，废金属，化肥，焦炭",
     throughput: "年吞吐量约11121万吨",
@@ -423,7 +423,7 @@ function showModal(port) {
     <p><strong>泊位数量及类型：</strong> ${port.berths}</p>
     <p><strong>主要货种：</strong> ${port.cargo}</p>
     <p><strong>年吞吐量：</strong> ${port.throughput}</p>
-    <p><strong>最大吃水深度：</strong> ${port.draft}</p>
+    <p><strong>吃水深度：</strong> ${port.draft}</p>
     <p><strong>开港时间：</strong> ${port.opening}</p>
     <p><strong>可靠泊船型：</strong> ${port.shipTypes}</p>
     <p><strong>港口费用：</strong></p>
