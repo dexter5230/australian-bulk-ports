@@ -12,15 +12,7 @@ function getInitialZoom() {
     return 3; // 小屏幕
   }
 }
-// 动态调整拖动行为
-function adjustMapSettings() {
-  const isMobile = window.innerWidth < 768;
-  map.dragging.enable();
-  map.scrollWheelZoom.disable();
-  if (isMobile) {
-    map.dragging.disable(); // 禁用拖动以避免误触
-  }
-}
+
 // 初始化地图
 var map = L.map('map', {
   center: [-25.2744, 133.7751],
@@ -186,7 +178,7 @@ var ports = [
     fees: { Handysize粮食: "81,480澳元", Handymax粮食: "94,890澳元", Supramax粮食: "98,215澳元", Panamax粮食: "142,340澳元", Handymax煤炭: "93,500澳元", Supramax煤炭: "97,350澳元", Ultramax煤炭: "106,050澳元", Panamax煤炭: "131,250澳元", Kamsarmax煤炭: "137,100澳元", PostPanamax煤炭: "149,625澳元", MiniCape煤炭: "172,200澳元", Capesize煤炭: "248,500澳元", Newcastlemax煤炭: "335,000澳元"  },
     cargo: "铜精矿，肥料，熟料，纸浆，锯材，钢铁，煤炭，谷物，水泥，矿物质",
     throughput: "暂无",
-    draft: "吃水深度：16米，103泊位sailing draft 13.9米+潮水/1.08UKC,104泊位sailing draft 14.9米+潮水/1.08UKC, maximum departure 14.4米+潮水-0.3UKC",
+    draft: "吃水深度：16米, 103泊位sailing draft 13.9米+潮水1.08UKC, 104泊位shilling draft 14.9米+潮水1.08UKC, maximum departure 14.4米+潮水-0.3UKC ",
     opening: "全年开放",
     shipTypes: "适合Handysize, Handymax, Supramax, Ultramax, Panamax, Kamsarmax, Post-Panamax, Mini-Cape, Capesize, Newcastlemax",
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
