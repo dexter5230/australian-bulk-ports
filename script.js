@@ -12,7 +12,15 @@ function getInitialZoom() {
     return 3; // 小屏幕
   }
 }
-
+// 动态调整拖动行为
+function adjustMapSettings() {
+  const isMobile = window.innerWidth < 768;
+  map.dragging.enable();
+  map.scrollWheelZoom.disable();
+  if (isMobile) {
+    map.dragging.disable(); // 禁用拖动以避免误触
+  }
+}
 // 初始化地图
 var map = L.map('map', {
   center: [-25.2744, 133.7751],
@@ -41,7 +49,7 @@ var openWeatherMapApiKey = "75cb1af3f90086faa221f4de75f0c803";
 // 示例港口数据
 var ports = [
   {
-    name: "Port of Groote Eylandt Milner Bay",
+    name: "Groote Eylandt Milner Bay",
     lat: -13.8481,
     lon: 136.4877,
     berths: "1个泊位，散货",
@@ -54,7 +62,7 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
   },
   {
-    name: "Port of Skardon River",
+    name: "Skardon River",
     lat: -10.6904,
     lon: 142.7905,
     berths: "暂无",
@@ -80,7 +88,7 @@ var ports = [
     historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [2734, 1979, 1597, 1620, 1517] }
   },
   {
-    name: "Port of Abbot Point",
+    name: "Abbot Point",
     lat: -20.3923,
     lon: 148.0956,
     berths: "2个泊位，散货",
@@ -93,7 +101,7 @@ var ports = [
     historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [2894, 3189, 2956, 2823, 3344] }
   },
   {
-    name: "Port of Mackay",
+    name: "Mackay",
     lat: -21.1415,
     lon: 149.1953,
     berths: "4个泊位，散货",
@@ -106,7 +114,7 @@ var ports = [
     historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [291, 318, 318, 359, 351] }
   },
   {
-    name: "Port of Hay Point",
+    name: "Hay Point",
     lat: -21.2081,
     lon: 149.2869,
     berths: "3个泊位，散货",
@@ -132,7 +140,7 @@ var ports = [
     historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: [6939, 6118, 5189, 5323, 5683] }
   },
   {
-    name: "Port of Gladstone",
+    name: "Gladstone",
     lat: -23.8495,
     lon: 151.2634,
     berths: "15个泊位，散货",
@@ -145,7 +153,7 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", 12402, 12199, 12262, 11941] }
   },
   {
-    name: "Port of Brisbane",
+    name: "Brisbane",
     lat: -27.4111,
     lon: 153.1176,
     berths: "13个泊位，散货",
@@ -158,7 +166,7 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", 3404, 3140, 2930, 3210] }
   },
   {
-    name: "Port of Newcastle",
+    name: "Newcastle",
     lat: -32.9173,
     lon: 151.7740,
     berths: "2个泊位，散货",
@@ -171,20 +179,20 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
   },
   {
-    name: "Port of Port Kembla",
+    name: "Port Kembla",
     lat: -34.4656,
     lon: 150.8955,
     berths: "4个泊位，散货",
     fees: { Handysize粮食: "81,480澳元", Handymax粮食: "94,890澳元", Supramax粮食: "98,215澳元", Panamax粮食: "142,340澳元", Handymax煤炭: "93,500澳元", Supramax煤炭: "97,350澳元", Ultramax煤炭: "106,050澳元", Panamax煤炭: "131,250澳元", Kamsarmax煤炭: "137,100澳元", PostPanamax煤炭: "149,625澳元", MiniCape煤炭: "172,200澳元", Capesize煤炭: "248,500澳元", Newcastlemax煤炭: "335,000澳元"  },
     cargo: "铜精矿，肥料，熟料，纸浆，锯材，钢铁，煤炭，谷物，水泥，矿物质",
     throughput: "暂无",
-    draft: "吃水深度：16米, 103泊位sailing draft 13.9米+潮水1.08UKC, 104泊位shilling draft 14.9米+潮水1.08UKC, maximum departure 14.4米+潮水-0.3UKC ",
+    draft: "吃水深度：16米，103泊位sailing draft 13.9米+潮水/1.08UKC,104泊位sailing draft 14.9米+潮水/1.08UKC, maximum departure 14.4米+潮水-0.3UKC",
     opening: "全年开放",
     shipTypes: "适合Handysize, Handymax, Supramax, Ultramax, Panamax, Kamsarmax, Post-Panamax, Mini-Cape, Capesize, Newcastlemax",
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
   },
   {
-    name: "Port of Port Hedland",
+    name: "Port Hedland",
     lat: -20.3086,
     lon: 118.5784,
     berths: "5个泊位，散货",
@@ -197,7 +205,7 @@ var ports = [
     historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: ["暂无", 53820, 54610, 56110, 56650] }
   },
   {
-    name: "Port of Cape Preston",
+    name: "Cape Preston",
     lat: -20.5294,
     lon: 117.2204,
     berths: "仅在锚地装载，散货",
@@ -210,7 +218,7 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
   },
   {
-    name: "Port of Onslow",
+    name: "Onslow",
     lat: -21.1626,
     lon: 115.1064,
     berths: "暂无",
@@ -223,7 +231,7 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
   },
   {
-    name: "Port of Esperance",
+    name: "Esperance",
     lat: -33.8603,
     lon: 121.8945,
     berths: "3个泊位，散货",
@@ -236,7 +244,7 @@ var ports = [
     historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: ["暂无", "暂无", "暂无", "暂无", 1360] }
   },
   {
-    name: "Port of Dampier",
+    name: "Dampier",
     lat: -20.6284,
     lon: 116.6872,
     berths: "7个泊位，散货",
@@ -249,7 +257,7 @@ var ports = [
     historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: ["暂无", 16793, 16741, 16189, 17400] }
   },
   {
-    name: "Port of Cape Cuvier",
+    name: "Cape Cuvier",
     lat: -24.7312,
     lon: 113.4778,
     berths: "1个泊位，散货",
@@ -262,7 +270,7 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
   },
   {
-    name: "Port of Geraldton",
+    name: "Geraldton",
     lat: -28.7784,
     lon: 114.6134,
     berths: "7个泊位，散货",
@@ -275,7 +283,7 @@ var ports = [
     historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: ["暂无", 1495, 1507, 1640, 1741] }
   },
   {
-    name: "Port of Kwinana",
+    name: "Kwinana",
     lat: -32.1897,
     lon: 115.7610,
     berths: "3个泊位，散货",
@@ -288,7 +296,7 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
   },
   {
-    name: "Port of Bunbury",
+    name: "Bunbury",
     lat: -33.3263,
     lon: 115.6353,
     berths: "5个泊位，散货",
@@ -301,7 +309,7 @@ var ports = [
     historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: ["暂无", "暂无", "暂无", "暂无", 1810] }
   },
   {
-    name: "Port of Albany",
+    name: "Albany",
     lat: -35.0219,
     lon: 117.8915,
     berths: "2个泊位，散货",
@@ -314,7 +322,7 @@ var ports = [
     historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: ["暂无", "暂无", "暂无", "暂无", 550] }
   },
   {
-    name: "Port of Port Latta",
+    name: "Port Latta",
     lat: -40.8952,
     lon: 145.3378,
     berths: "暂无",
@@ -327,7 +335,7 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
   },
   {
-    name: "Port of Geelong",
+    name: "Geelong",
     lat: -38.1499,
     lon: 144.3607,
     berths: "4个泊位，散货",
@@ -340,7 +348,7 @@ var ports = [
     historicalData: { years: ["2019", "2020", "2021", "2022", "2023"], throughput: ["暂无", 1152, 1078, 1162, 1151] }
   },
   {
-    name: "Port of Portland",
+    name: "Portland",
     lat: -38.3586,
     lon: 141.5930,
     berths: "5个泊位，散货",
@@ -353,7 +361,7 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
   },
   {
-    name: "Port of Melbourne",
+    name: "Melbourne",
     lat: -37.8143,
     lon: 144.9632,
     berths: "6个泊位，散货",
@@ -366,7 +374,7 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
   },
   {
-    name: "Port of Adelaide",
+    name: "Adelaide",
     lat: -34.9285,
     lon: 138.6007,
     berths: "3个泊位，散货",
@@ -379,7 +387,7 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
   },
   {
-    name: "Port of Whyalla",
+    name: "Whyalla",
     lat: -33.0325,
     lon: 137.5886,
     berths: "4个泊位，散货",
@@ -392,7 +400,7 @@ var ports = [
     historicalData: { years: ["2018", "2019", "2020", "2021", "2022"], throughput: ["暂无", "暂无", "暂无", "暂无", "暂无"] }
   },
   {
-    name: "Port of Lincoln",
+    name: "Lincoln",
     lat: -34.7339,
     lon: 135.8684,
     berths: "2个泊位，散货",
@@ -416,33 +424,11 @@ ports.forEach(port => {
 });
 
 // 显示模态窗口
-function showModal(port) {
-  document.getElementById("modalTitle").innerText = port.name;
-
-  document.getElementById("modalContent").innerHTML = `
-    <p><strong>泊位数量及类型：</strong> ${port.berths}</p>
-    <p><strong>主要货种：</strong> ${port.cargo}</p>
-    <p><strong>年吞吐量：</strong> ${port.throughput}</p>
-    <p><strong>吃水深度：</strong> ${port.draft}</p>
-    <p><strong>开港时间：</strong> ${port.opening}</p>
-    <p><strong>可靠泊船型：</strong> ${port.shipTypes}</p>
-    <p><strong>港口费用：</strong></p>
-    ${Object.entries(port.fees).map(([shipType, fee]) => `<p>${shipType}: ${fee}</p>`).join('')}
-  `;
-
-  document.getElementById("portModal").style.display = "block";
-  
-  fetchWeatherData(port);
-  fetchAirQualityData(port);
-  displayThroughputChart(port);
-}
-
-// 获取天气数据
-function fetchWeatherData(port) {
+function fetchWeatherDataAndDisplay(port) {
   var weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${port.lat}&lon=${port.lon}&appid=${openWeatherMapApiKey}&units=metric&lang=zh_cn`;
 
-  $.getJSON(weatherUrl)
-    .done(function(weatherData) {
+  return $.getJSON(weatherUrl)
+    .then(function(weatherData) {
       var temperature = weatherData.main.temp;
       var weatherDescription = weatherData.weather[0].description;
       var weatherIcon = weatherData.weather[0].icon;
@@ -451,8 +437,8 @@ function fetchWeatherData(port) {
       var humidity = weatherData.main.humidity;
       var iconUrl = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
 
-      document.getElementById("weatherInfo").innerHTML = `
-        <div class="weather-info">
+      return `
+        <div class="weather-info-box">
           <img src="${iconUrl}" alt="Weather icon">
           <div>
             <p><strong>${temperature}°C - ${weatherDescription}</strong></p>
@@ -461,30 +447,94 @@ function fetchWeatherData(port) {
           </div>
         </div>
       `;
-      document.getElementById("weatherInfo").classList.add("show");
     })
-    .fail(function() {
-      document.getElementById("weatherInfo").innerHTML = "<p>无法获取天气信息</p>";
-      document.getElementById("weatherInfo").classList.add("show");
+    .catch(function() {
+      return "<p>无法获取天气信息</p>";
     });
 }
 
-// 获取空气质量数据
-function fetchAirQualityData(port) {
-  var airQualityUrl = `https://api.waqi.info/feed/geo:${port.lat};${port.lon}/?token=${aqicnApiKey}`;
+// 修改 showModal 函数
+async function showModal(port) {
+  const modalContent = document.getElementById("modalContent");
 
-  $.getJSON(airQualityUrl)
-    .done(function(airData) {
-      var aqi = airData.data.aqi;
-      var airQuality = aqi <= 50 ? "优" : aqi <= 100 ? "良" : "不健康";
-      
-      document.getElementById("weatherInfo").innerHTML += `
+  // 清空旧的模态窗口内容
+  modalContent.innerHTML = "";
+
+  // 获取天气和空气质量信息
+  const weatherAndAirQualityHtml = await fetchWeatherAndAirQualityDataAndDisplay(port);
+
+  // 填充新的模态窗口内容
+  modalContent.innerHTML = `
+    <p><strong>泊位数量及类型：</strong> ${port.berths}</p>
+    <p><strong>主要货种：</strong> ${port.cargo}</p>
+    <p><strong>年吞吐量：</strong> ${port.throughput}</p>
+    <p><strong>吃水深度：</strong> ${port.draft}</p>
+    <p><strong>开港时间：</strong> ${port.opening}</p>
+    <p><strong>可靠泊船型：</strong> ${port.shipTypes}</p>
+    <p><strong>港口费用：</strong></p>
+    ${Object.entries(port.fees).map(([shipType, fee]) => `<p>${shipType}: ${fee}</p>`).join('')}
+    <h3>当前天气与空气质量：</h3>
+    ${weatherAndAirQualityHtml}
+  `;
+
+  document.getElementById("portModal").style.display = "block";
+  displayThroughputChart(port); // 保持吞吐量图表逻辑不变
+}
+
+
+
+
+// 获取天气数据
+function fetchWeatherAndAirQualityDataAndDisplay(port) {
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${port.lat}&lon=${port.lon}&appid=${openWeatherMapApiKey}&units=metric&lang=zh_cn`;
+  const airQualityUrl = `https://api.waqi.info/feed/geo:${port.lat};${port.lon}/?token=${aqicnApiKey}`;
+
+  // 使用 Promise.all 同时获取天气和空气质量数据
+  return Promise.all([
+    $.getJSON(weatherUrl).catch(() => null), // 天气数据
+    $.getJSON(airQualityUrl).catch(() => null) // 空气质量数据
+  ]).then(([weatherData, airQualityData]) => {
+    // 天气信息处理
+    let weatherHtml = "<p>无法获取天气信息</p>";
+    if (weatherData) {
+      const temperature = weatherData.main.temp;
+      const weatherDescription = weatherData.weather[0].description;
+      const weatherIcon = weatherData.weather[0].icon;
+      const windSpeed = weatherData.wind.speed;
+      const windDirection = weatherData.wind.deg;
+      const humidity = weatherData.main.humidity;
+      const iconUrl = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
+
+      weatherHtml = `
         <div>
-          <p>AQI: ${aqi} (${airQuality})</p>
+          <img src="${iconUrl}" alt="Weather icon">
+          <div>
+            <p><strong>${temperature}°C - ${weatherDescription}</strong></p>
+            <p>湿度: ${humidity}%</p>
+            <p>风速: ${windSpeed} 米/秒，方向: ${getWindDirection(windDirection)}</p>
+          </div>
         </div>
       `;
-    });
+    }
+
+    // 空气质量信息处理
+    let airQualityHtml = "<p>无法获取空气质量信息</p>";
+    if (airQualityData && airQualityData.data) {
+      const aqi = airQualityData.data.aqi;
+      const airQuality = aqi <= 50 ? "优" : aqi <= 100 ? "良" : "不健康";
+      airQualityHtml = `<p>AQI: ${aqi} (${airQuality})</p>`;
+    }
+
+    // 返回组合后的 HTML
+    return `
+      <div class="weather-info-box">
+        ${weatherHtml}
+        ${airQualityHtml}
+      </div>
+    `;
+  });
 }
+
 
 // 显示吞吐量图表
 let throughputChart = null;
@@ -700,7 +750,28 @@ function applyFilter() {
     }))
     .sort((a, b) => b.throughputValue - a.throughputValue);
   break;
-    
+
+    case "generalCargo":
+      // 筛选出不只是装卸煤炭、铁矿石、谷物的港口
+      filteredPorts = ports.filter(port => {
+        const cargo = port.cargo || "";
+        const hasCoal = /煤/.test(cargo);
+        const hasIronOre = /铁矿/.test(cargo);
+        const hasGrain = /谷物/.test(cargo);
+
+        // 确保港口货物不仅仅是煤炭、铁矿石、谷物
+        const totalMatches = [hasCoal, hasIronOre, hasGrain].filter(Boolean).length;
+        return (
+          totalMatches < cargo.split("，").length && // 货物种类多于煤、铁矿、谷物
+          port.name !== "Port Hedland" // 排除 Port Hedland
+        );
+      })
+      .map(port => ({
+        ...port,
+        throughputValue: parseFloat(port.throughput.replace(/[^\d.-]/g, '')) || 0
+      }))
+      .sort((a, b) => b.throughputValue - a.throughputValue);
+      break;
   }
 
   updateTable(filteredPorts);
@@ -736,6 +807,7 @@ function updateTable(portList) {
     rankTableBody.appendChild(row);
   });
 }
+
 
 // 页面加载时初始化筛选，显示初始的港口列表
 window.addEventListener("load", function() {
