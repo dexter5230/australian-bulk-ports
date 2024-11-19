@@ -1,3 +1,4 @@
+/* 全局样式 */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -26,18 +27,18 @@ main {
   overflow: hidden;
 }
 
-/* 更新排名表样式，使其更美观 */
+/* 排名表样式 */
 #rankContainer {
   position: absolute;
-  top: 60px;
-  left: 10px;
-  width: 300px;
+  top: 20px; /* 靠顶部对齐 */
+  left: 10px; /* 靠左侧对齐 */
+  width: 300px; /* 固定宽度 */
   background-color: white;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
-  max-height: 70vh;
+  max-height: 70vh; /* 限制高度 */
   z-index: 1000;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
@@ -50,7 +51,7 @@ main {
 
 #expandButton {
   position: absolute;
-  top: 60px;
+  top: 70px; /* 对应排名表顶部位置 */
   left: 0;
   background-color: #333;
   color: white;
@@ -58,7 +59,6 @@ main {
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   cursor: pointer;
-  display: none;
   z-index: 1001;
 }
 
@@ -66,7 +66,7 @@ main {
   background-color: #555;
 }
 
-
+/* 表格样式 */
 #rankTable {
   width: 100%;
   border-collapse: collapse;
@@ -78,7 +78,7 @@ main {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  font-size: 14px;
+  font-size: 12px;
   color: #333;
 }
 
@@ -96,19 +96,11 @@ main {
   background-color: #e0e0e0; /* 悬停时变色 */
 }
 
-/* 表格标题样式 */
-#rankContainer h3 {
-  margin: 0;
-  font-size: 18px;
-  color: #333;
-  font-weight: bold;
-}
-
-/* 右上角的搜索栏 */
+/* 搜索栏样式 */
 #searchContainer {
   position: absolute;
-  top: 60px; /* 与标题栏有一定距离 */
-  right: 10px;
+  top: 10px; /* 靠顶部对齐 */
+  right: 10px; /* 靠右对齐 */
   width: 250px;
   background-color: white;
   padding: 10px;
@@ -145,52 +137,28 @@ main {
   background-color: #eee;
 }
 
-/* 排名表样式 */
-#rankTable {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-#rankTable th,
-#rankTable td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-#rankTable th {
-  background-color: #333;
-  color: white;
-}
-
-#rankTable tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-#rankTable tr:hover {
-  background-color: #e6e6e6;
-}
+/* 模态窗口样式 */
 .modal {
   display: none; /* 默认隐藏模态窗口 */
   position: fixed;
   top: 15%;
   left: 50%;
   transform: translate(-50%, 0);
-  width: 90%; /* 仍然使用90%的宽度 */
-  max-width: 700px; /* 增加最大宽度，设置为700px */
+  width: 90%; /* 宽度适配 */
+  max-width: 700px; /* 最大宽度限制 */
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
 }
 
 .modal-content {
   background-color: #fefefe;
-  padding: 20px; /* 模态窗口内边距 */
+  padding: 20px;
   width: 100%;
-  max-width: 700px; /* 同样增加内容的最大宽度 */
+  max-width: 700px;
   border-radius: 8px;
   text-align: left;
   max-height: 70vh;
-  overflow-y: auto; /* 当内容溢出时显示滚动条 */
+  overflow-y: auto;
   position: relative;
 }
 
@@ -205,53 +173,48 @@ main {
   padding: 5px 10px;
   border-radius: 4px;
   color: #333;
-  z-index: 1001;
 }
 
 .close:hover {
-  background-color: #ddd; /* 悬停效果 */
+  background-color: #ddd;
 }
 
-/* 天气标签放置在模态窗口右上角 */
-.weather-info-box {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: #f7f7f7;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 14px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  opacity: 0; /* 初始透明度为0 */
-  transform: translateY(-10px); /* 初始位置上移10像素 */
-  transition: opacity 0.5s ease, transform 0.5s ease; /* 添加过渡效果 */
-  z-index: 1001;
-  max-width: 150px; /* 限制天气信息框的最大宽度 */
-}
-
-.weather-info-box.show {
-  opacity: 1; /* 显示时透明度为1 */
-  transform: translateY(0); /* 还原位置 */
-}
-
-.weather-info-box img {
-  width: 40px; /* 天气图标的宽度 */
-  height: 40px; /* 天气图标的高度 */
-  margin-right: 8px; /* 图标与文本之间的间距 */
-}
-
+/* 图表容器样式 */
 .chart-container {
   margin-top: 20px; /* 图表上方的间距 */
 }
 
-/* 为模态窗口的内容增加顶部间距 */
-.modal-content > * {
-  margin-top: 10px; /* 在内容之间增加间距 */
+/* 天气信息框样式 */
+.weather-info-box {
+  display: block;
+  background-color: transparent;
+  padding: 5px 0;
+  margin: 0;
+  border: none;
+  box-shadow: none;
 }
 
-/* 给天气信息框的顶部增加空间 */
-.weather-info-box {
-  margin-top: 50px; /* 在天气框上方留出空间 */
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+  #rankContainer {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: auto;
+    bottom: 10px;
+  }
+
+  #expandButton {
+    top: auto;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  #searchContainer {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: auto;
+    bottom: 70px; /* 避免覆盖排名表 */
+  }
 }
