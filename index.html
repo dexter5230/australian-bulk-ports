@@ -1,10 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>澳大利亚散货港口概览</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
   <link rel="stylesheet" href="style.css">
@@ -12,47 +10,46 @@
 <body>
   <header>
     <h1>澳大利亚散货港口概览</h1>
-  </header>
-
-<main>
-  <!-- 地图区域 -->
-  <div id="map">
-    <!-- 左上角的排名表 -->
-    <div id="expandButton" onclick="toggleRankList()" style="display: none;">展开</div>
-    <div id="rankContainer">
-      <button id="toggleButton" onclick="toggleRankList()">收起</button>
-      <h3>港口筛选</h3>
-      <select id="filterSelect" onchange="applyFilter()">
-        <option value="top10Throughput">Top 10 吞吐量港口</option>
-        <option value="ironOre">主要铁矿石港口</option>
-        <option value="grain">主要粮食港口</option>
-        <option value="coal">主要煤炭港口</option>
-        <option value="generalCargo">主要杂货港口</option>
-      </select>
-      <table id="rankTable">
-        <thead>
-          <tr>
-            <th>排名</th>
-            <th>港口名称</th>
-            <th>年吞吐量 (万吨)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- JS代码将填充内容 -->
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 右上角的搜索栏 -->
+    <!-- 搜索栏移动到标题下方 -->
     <div id="searchContainer">
       <input type="text" id="searchBox" placeholder="搜索港口..." oninput="handleSearchInput()" />
       <ul id="suggestionsList"></ul>
     </div>
-  </div>
-</main>
+  </header>
+
+  <main>
+    <!-- 地图区域 -->
+    <div id="map">
+      <!-- 左上角的排名表 -->
+      <div id="expandButton" onclick="toggleRankList()" style="display: none;">展开</div>
+      <div id="rankContainer">
+        <button id="toggleButton" onclick="toggleRankList()">收起</button>
+        <h3>港口筛选</h3>
+        <select id="filterSelect" onchange="applyFilter()">
+          <option value="top10Throughput">Top 10 吞吐量港口</option>
+          <option value="ironOre">主要铁矿石港口</option>
+          <option value="grain">主要粮食港口</option>
+          <option value="coal">主要煤炭港口</option>
+          <option value="generalCargo">主要杂货港口</option>
+        </select>
+        <table id="rankTable">
+          <thead>
+            <tr>
+              <th>排名</th>
+              <th>港口名称</th>
+              <th>年吞吐量 (万吨)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- JS代码将填充内容 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
   <!-- 模态窗口 -->
   <div id="portModal" class="modal">
-
     <div class="modal-content">
       <span class="close" onclick="closeModal()">×</span>
       <h2 id="modalTitle">港口名称</h2>
